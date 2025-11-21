@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메가스터디 러셀 챗봇</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .app {
+      width: 100%;
+      max-width: 420px;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+      display: flex;
+      flex-direction: column;
+      height: 700px;
+    }
+    header {
+      background: #0072ff;
+      color: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+    }
+    header h1 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+    header span {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+    .chat-area {
+      flex: 1;
+      padding: 12px 14px;
+      overflow-y: auto;
+      background: #f9fafb;
+    }
+    .msg {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .msg-bot .bubble {
+      background: #e5e7eb;
+      color: #111827;
+      border-radius: 14px;
+      border-bottom-left-radius: 4px;
+    }
+    .bubble {
+      font-size: 13px;
+      padding: 9px 11px;
+      line-height: 1.4;
+      max-width: 85%;
+      white-space: pre-line;
+    }
+    .link-list {
+      margin-top: 6px;
+      font-size: 12px;
+    }
+    .link-list a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .link-list a:hover {
+      text-decoration: underline;
+    }
+    .btn-area {
+      border-top: 1px solid #e5e7eb;
+      padding: 10px 10px 14px;
+      background: #ffffff;
+    }
+    .btn-title {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+    .btn-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip-btn {
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      padding: 7px 12px;
+      font-size: 12px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    .chip-btn.main {
+      font-weight: 600;
+    }
+    .chip-btn:hover {
+      background: #f3f4f6;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>메가스터디 러셀 챗봇</h1>
+    <span>대치학원 안내</span>
+  </header>
+
+  <div class="chat-area" id="chat"></div>
+
+  <div class="btn-area">
+    <div class="btn-title" id="btn-title">원하시는 메뉴를 선택해 주세요.</div>
+    <div class="btn-list" id="btn-list"></div>
+  </div>
+</div>
+
+<script>
+  /* ===============================
+     메뉴 & URL 설정
+     =============================== */
+  const MENU_DATA = {
+
+    // 1. 학원 이용 가이드
+    "학원 이용 가이드": [
+      {
+        label: "학원 공지사항",
+        desc: "최근 학원 공지 및 안내사항",
+        url: "https://russeldc.megastudy.net/russel/info/notice/notice.asp"
+      },
+      {
+        label: "설명회 예약/알림",
+        desc: "설명회 일정 확인 및 알림 신청",
+        url: "https://russeldc.megastudy.net/russel/entinfo/entry_pt/enter_pt_list.asp"
+      },
+      {
+        label: "자주하는 질문",
+        desc: "등록, 수강, 환불 등 FAQ",
+        url: "https://russeldc.megastudy.net/russel/info/qna/faq.asp"
+      },
+      {
+        label: "1:1 온라인 상담",
+        desc: "온라인 학습·진학 상담 신청",
+        url: "https://russeldc.megastudy.net/russel/info/qna/qna.asp"
+      },
+      {
+        label: "단과 마감강좌 대기 신청",
+        desc: "마감된 단과 강좌 대기 신청",
+        url: "https://russeldc.megastudy.net/russel/info/waiting/list.asp?ClsCode=1"
+      },
+      {
+        label: "모의고사 구매",
+        desc: "러셀 모의고사 구매",
+        url: "https://russeldc.megastudy.net/russel/online_mock/index.asp"
+      },
+      {
+        label: "마이페이지(재등록/교재/좌석/급식)",
+        desc: "재등록, 교재, 좌석예약, 급식 신청",
+        url: "https://russeldc.megastudy.net/russel/entinfo/online/service.asp"
+      }
+    ],
+
+    // 2. 모집요강 및 단과 시간표
+    "모집요강 및 단과 시간표": [
+      {
+        label: "N수 우선선발반 모집요강",
+        desc: "2026 N수 우선선발반 모집 안내",
+        url: "https://russeldc.megastudy.net/intro/2026/first/index.asp"
+      },
+      {
+        label: "재학생 윈터스쿨 모집요강",
+        desc: "재학생 윈터스쿨 모집 안내",
+        url: "https://russeldc.megastudy.net/intro/2025/winter/index.asp"
+      },
+      {
+        label: "고3/N수 단과 시간표",
+        desc: "고3·N수 단과 강좌 시간표",
+        url: "https://russeldc.megastudy.net/russel/campus_common/russel_danka/russel_danka_new.asp?idx=2198"
+      },
+      {
+        label: "고2/1 단과 시간표",
+        desc: "고2·고1 단과 강좌 시간표",
+        url: "https://russeldc.megastudy.net/russel/campus_common/russel_danka/russel_danka_new.asp?idx=2185"
+      },
+      {
+        label: "시즌/특강 시간표",
+        desc: "시즌·특강(파이널 등) 시간표",
+        url: "https://russeldc.megastudy.net/russel/campus_common/russel_danka/russel_danka_new.asp?idx=2184"
+      },
+      {
+        label: "논술 특강 시간표",
+        desc: "논술 특강 시간표",
+        url: "https://russeldc.megastudy.net/russel/campus_common/russel_danka/russel_danka_new.asp?idx=2105"
+      }
+    ],
+
+    // 3. 바른공부 자습전용관
+    "바른공부 자습전용관": [
+      {
+        label: "자습전용관 안내",
+        desc: "바른공부 자습전용관 운영·이용 안내",
+        url: "https://russeldc.megastudy.net/russel/info/study_hall/study_hall.asp"
+      },
+      {
+        label: "재학생 특별 혜택",
+        desc: "재학생 대상 특별 혜택 안내",
+        url: "https://russeldc.megastudy.net/russel/event/2020/megapass/megapass.asp"
+      },
+      {
+        label: "주간 식단표",
+        desc: "이번 주 학원 식단표 확인",
+        url: "https://russeldc.megastudy.net/russel/campus_common/campus/weekly_food.asp"
+      }
+    ],
+
+    // 4. 모의고사 일정/콘텐츠
+    "모의고사 일정/콘텐츠": [
+      {
+        label: "2026년 모의고사 일정",
+        desc: "2026년 러셀 모의고사 일정 안내",
+        url: "https://russeldc.megastudy.net/russel/entinfo/test_schedule.asp?year=2026"
+      },
+      {
+        label: "OMEGA 모의고사",
+        desc: "OMEGA 모의고사 소개",
+        url: "https://russeldc.megastudy.net/event/omega_intro/index.asp"
+      },
+      {
+        label: "전국 대단위 실전 모의고사",
+        desc: "전국 대단위 실전 모의고사 안내",
+        url: "https://russeldc.megastudy.net/event/2025/jdsm/index.asp"
+      },
+      {
+        label: "메대프 모의고사",
+        desc: "메대프 모의고사 소개",
+        url: "https://russeldc.megastudy.net/intro/2022/premium/index.asp"
+      },
+      {
+        label: "ALPHA 모의고사",
+        desc: "ALPHA 모의고사 소개",
+        url: "https://russeldc.megastudy.net/event/2025/alpha/index.asp"
+      }
+    ],
+
+    // 5. 출강 선생님 안내
+    "출강 선생님 안내": [
+      {
+        label: "국어",
+        desc: "국어 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0023"
+      },
+      {
+        label: "수학",
+        desc: "수학 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0024"
+      },
+      {
+        label: "영어",
+        desc: "영어 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0025"
+      },
+      {
+        label: "한국사",
+        desc: "한국사 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0049"
+      },
+      {
+        label: "사회",
+        desc: "사회 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0026"
+      },
+      {
+        label: "과학",
+        desc: "과학 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0027"
+      },
+      {
+        label: "논술",
+        desc: "논술 출강 선생님 소개",
+        url: "https://russeldc.megastudy.net/russel/teacher/teacher.asp?te_les=CD0028"
+      }
+    ],
+
+    // 6. 학원 이용 안내
+    "학원 이용 안내": [
+      {
+        label: "학원 시설",
+        desc: "강의실, 자습실 등 시설 안내",
+        url: "https://russeldc.megastudy.net/russel/info/campus_facility.asp"
+      },
+      {
+        label: "오시는 길",
+        desc: "러셀 대치학원 위치 안내",
+        url: "https://russeldc.megastudy.net/russel/info/location.asp"
+      },
+      {
+        label: "문자 알림 신청",
+        desc: "학원 문자 알림 신청/관리",
+        url: "https://russeldc.megastudy.net/russel/entinfo/entry_pt/enter_pt_list.asp"
+      }
+    ]
+  };
+
+  /* ===============================
+     공통 JS 로직
+     =============================== */
+
+  const chat = document.getElementById("chat");
+  const btnList = document.getElementById("btn-list");
+  const btnTitle = document.getElementById("btn-title");
+
+  const MAIN_MENUS = Object.keys(MENU_DATA);
+
+  function addBotMessage(text, linksHtml = "") {
+    const wrap = document.createElement("div");
+    wrap.className = "msg msg-bot";
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.textContent = text;
+
+    wrap.appendChild(풍선껌);
+
+    if (linksHtml) {
+      const box = document.createElement("div");
+      box.className = "link-list";
+      box.innerHTML = linksHtml;
+      bubble.appendChild(document.createElement("br"));
+      bubble.appendChild(box);
+    }
+
+    chat.appendChild(wrap);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function renderMainButtons() {
+    btnTitle.textContent = "원하시는 메뉴를 선택해 주세요.";
+    btnList.innerHTML = "";
+    MAIN_MENUS.forEach(menu => {
+      const btn = document.createElement("button");
+      btn.className = "chip-btn main";
+      btn.textContent = menu;
+      btn.onclick = () => openMenu(menu);
+      btnList.appendChild(btn);
+    });
+  }
+
+  function openMenu(menuName) {
+    const items = MENU_DATA[menuName];
+    if (!items) return;
+
+    addBotMessage(`『${menuName}』 관련 주요 메뉴입니다.\n원하시는 항목을 선택해 주세요.`);
+
+    btnTitle.textContent = `${menuName} 세부 메뉴`;
+    btnList.innerHTML = "";
+
+    items.forEach(item => {
+      const btn = document.createElement("button");
+      btn.className = "chip-btn";
+      btn.textContent = item.label;
+      btn.title = item.desc;
+      btn.onclick = () => {
+        const html = `<a href="${item.url}" target="_blank">${item.label} 바로가기</a>`;
+        addBotMessage(`${item.label} 페이지로 이동합니다.\n(${item.desc})`, html);
+        window.open(item.url, "_blank");
+      };
+      btnList.appendChild(btn);
+    });
+
+    const homeBtn = document.createElement("button");
+    homeBtn.className = "chip-btn";
+    homeBtn.textContent = "◀ 처음으로";
+    homeBtn.onclick = () => {
+      addBotMessage("처음 메뉴로 돌아갑니다.");
+      renderMainButtons();
+    };
+    btnList.appendChild(homeBtn);
+  }
+
+  function init() {
+    const firstMsg =
+      "안녕하세요. 메가스터디 러셀 대치학원 챗봇입니다.\n\n" +
+      "학원 이용, 모집요강, 단과 시간표, 자습전용관, 모의고사, 출강 선생님 정보까지\n" +
+      "아래 버튼을 눌러서 궁금한 내용을 선택해 주세요.";
+    addBotMessage(firstMsg);
+    renderMainButtons();
+  }
+
+  init();
+</script>
+</body>
+</html>
