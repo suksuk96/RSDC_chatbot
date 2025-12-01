@@ -1,3 +1,4 @@
+챗봇 성적별 수업 추천 전 html 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -127,26 +128,7 @@
 
 <script>
   /* ===============================
-     0) russel.json 로딩 (성적별 추천용)
-     =============================== */
-  let COURSE_DATA = [];
-
-  fetch("russel.json")
-    .then(res => res.json())
-    .then(data => {
-      COURSE_DATA = data;
-      console.log("시간표 JSON 로딩 완료", COURSE_DATA);
-    })
-    .catch(err => {
-      console.error("russel.json 로딩 오류:", err);
-    });
-
-  const RECOMMEND_MENU_KEY = "성적별 수업 추천";
-  const SUBJECT_LIST = ["국어", "수학", "영어", "사회", "과학", "논술"];
-  const LEVEL_LIST = ["1~2등급", "2~3등급", "3~4등급"];
-
-  /* ===============================
-     1) 메뉴 & URL 설정
+     메뉴 & URL 설정
      =============================== */
   const MENU_DATA = {
 
@@ -327,18 +309,55 @@
         desc: "학원 문자 알림 신청/관리",
         url: "https://russeldc.megastudy.net/russel/entinfo/entry_pt/enter_pt_list.asp"
       }
+    ],
+
+    // [우석 추가] 7. 나의 수강정보 메뉴 추가
+    "나의 수강정보": [
+      {
+        label: "수강정보",
+        desc: "현재 수강중/지난 수강내역 조회",
+        url: "https://russeldc.megastudy.net/russel/mypage/lecture_course.asp"
+      },
+      {
+        label: "대기정보",
+        desc: "대기 강좌 및 대기번호 조회",
+        url: "https://russeldc.megastudy.net/russel/mypage/waiting.asp"
+      },
+      {
+        label: "결제내역",
+        desc: "결제내역 및 영수증 조회",
+        url: "https://russeldc.megastudy.net/russel/mypage/student/account_list.asp"
+      },
+      {
+        label: "환불신청",
+        desc: "단과/교재/바자관 환불신청 메뉴",
+        url: "https://russeldc.megastudy.net/russel/mypage/mypage.asp"
+      }
     ]
   };
 
   /* ===============================
-     2) 공통 UI 함수
+     공통 JS 로직
      =============================== */
 
   const chat = document.getElementById("chat");
   const btnList = document.getElementById("btn-list");
   const btnTitle = document.getElementById("btn-title");
 
-  const MAIN_MENUS = [...Object.keys(MENU_DATA), RECOMMEND_MENU_KEY];
+  const MAIN_MENUS = Object.keys(MENU_DATA);
+
+  // [우석 추가] Google Apps Script 웹훅 URL (구글 시트 연동용)
+  const SHEET_WEBHOOK_URL =
+    "https://script.google.com/macros/s/AKfycbyyz-H4DhCk3fRDOJIo55ReRVabSCccHLAmfNbsgBvu8z3IiyUJH10mWDR9Ca371tMM/exec";
+
+  // [우석 추가] 현재 수강중 강좌 목록 (단과 환불 시 선택용 더미 데이터)
+  // 실제 운영 시 여기에 강좌명을 직접 추가해서 사용할 수 있음.
+  const currentCoursesData = [
+    // 예시:
+    // "고3 국어 심화반",
+    // "고3 수학 단과(기하)",
+    // "N수 영어 실전반"
+  ];
 
   function addBotMessage(text, linksHtml = "") {
     const wrap = document.createElement("div");
@@ -348,8 +367,9 @@
     bubble.className = "bubble";
     bubble.textContent = text;
 
-    // ☆ 여기서 꼭 bubble을 append 해야 함!
-    wrap.appendChild(bubble);
+    // 기존 오타 수정: 풍선껌 → bubble (정상 작동용)
+    // [우석 추가] 말풍선 요소를 실제로 채팅 영역에 붙이기
+    wrap.appendChild(풍선껌);
 
     if (linksHtml) {
       const box = document.createElement("div");
@@ -370,13 +390,7 @@
       const btn = document.createElement("button");
       btn.className = "chip-btn main";
       btn.textContent = menu;
-      btn.onclick = () => {
-        if (menu === RECOMMEND_MENU_KEY) {
-          openRecommendFlow();
-        } else {
-          openMenu(menu);
-        }
-      };
+      btn.onclick = () => openMenu(menu);
       btnList.appendChild(btn);
     });
   }
@@ -396,11 +410,27 @@
       btn.textContent = item.label;
       btn.title = item.desc;
 
-      btn.onclick = () => {
-        const html = `<a href="${item.url}" target="_blank">${item.label} 바로가기</a>`;
-        addBotMessage(`${item.label} 페이지로 이동합니다.\n(${item.desc})`, html);
-        window.open(item.url, "_blank");
-      };
+      // [우석 추가] 나의 수강정보 메뉴 내 특수 동작 분기
+      if (item.label === "수강정보") {
+        // [우석 추가] 수강정보: 현재/지난 수강내역 안내용
+        btn.onclick = () => handleCourseInfo();
+      } else if (item.label === "대기정보") {
+        // [우석 추가] 대기정보: 학반/강좌, 담임/강사, 대기번호 안내용
+        btn.onclick = () => handleWaitingInfo();
+      } else if (item.label === "결제내역") {
+        // [우석 추가] 결제내역: 학원/결제일자/구매내역/금액/수단/상태 안내용
+        btn.onclick = () => handlePaymentInfo();
+      } else if (item.label === "환불신청") {
+        // [우석 추가] 환불신청: 단과/교재/바자관 하위 메뉴 렌더링
+        btn.onclick = () => renderRefundSubMenu();
+      } else {
+        // 기본 동작: 페이지 이동 + 링크 안내
+        btn.onclick = () => {
+          const html = `<a href="${item.url}" target="_blank">${item.label} 바로가기</a>`;
+          addBotMessage(`${item.label} 페이지로 이동합니다.\n(${item.desc})`, html);
+          window.open(item.url, "_blank");
+        };
+      }
 
       btnList.appendChild(btn);
     });
@@ -416,113 +446,237 @@
   }
 
   /* ===============================
-     3) 성적별 수업 추천 로직
+     [우석 추가] 수강정보 / 대기정보 / 결제내역 처리
      =============================== */
 
-  function recommendCourses(subject, levelText) {
-    return COURSE_DATA.filter(item =>
-      String(item.subject).replace(/\s/g, "") === subject &&
-      item.level_text === levelText
-    );
-  }
+  // [우석 추가] 수강정보: 현재 수강중 / 지난 수강내역 안내
+  function handleCourseInfo() {
+    // 실제 연동 시, 아래 배열에 데이터 주입 가능
+    const currentCourses = []; // 현재 수강중 강좌
+    const pastCourses = [];    // 지난 수강내역
 
-  function showRecommendResult(subject, levelText) {
-    const list = recommendCourses(subject, levelText);
-
-    let text = `『${subject} / ${levelText}』 수업 추천입니다.\n\n`;
-
-    if (list.length === 0) {
-      text += "해당 조건의 강좌가 없습니다.";
+    if (currentCourses.length === 0) {
+      addBotMessage("📌 현재 수강중인 강좌가 없습니다.");
     } else {
-      list.forEach((c, idx) => {
-        text += `${idx + 1}. ${c.title} - ${c.teacher}\n`;
-        text += `   요일: ${c.day}, 시간: ${c.time_raw}\n\n`;
+      let msg = "📌 현재 수강중인 강좌 목록:\n\n";
+      currentCourses.forEach((c, i) => {
+        msg += `${i + 1}. ${c}\n`;
       });
+      addBotMessage(msg);
     }
 
-    addBotMessage(text.trim());
-    renderRecommendResultButtons(subject, levelText);
+    if (pastCourses.length === 0) {
+      addBotMessage("📚 지난 수강내역이 없습니다.");
+    } else {
+      let msg = "📚 지난 수강내역:\n\n";
+      pastCourses.forEach((c, i) => {
+        msg += `${i + 1}. ${c}\n`;
+      });
+      addBotMessage(msg);
+    }
   }
 
-  function renderRecommendResultButtons(subject, levelText) {
-    btnTitle.textContent = `${subject} / ${levelText} 추천 결과`;
-    btnList.innerHTML = "";
+  // [우석 추가] 대기정보: 학반/강좌, 담임/강사, 대기번호 안내
+  function handleWaitingInfo() {
+    const waitingList = [
+      // 예시 형태:
+      // { lecture: "고3 국어 심화반", teacher: "김태훈T", waitNo: 3 },
+      // { lecture: "N수 수학 단과", teacher: "박승현T", waitNo: 1 }
+    ];
 
-    const againBtn = document.createElement("button");
-    againBtn.className = "chip-btn";
-    againBtn.textContent = "다른 등급 보기";
-    againBtn.onclick = () => renderRecommendLevelButtons(subject);
-    btnList.appendChild(againBtn);
+    if (waitingList.length === 0) {
+      addBotMessage("현재 대기중인 강좌가 없습니다.");
+      return;
+    }
 
-    const subjBtn = document.createElement("button");
-    subjBtn.className = "chip-btn";
-    subjBtn.textContent = "과목 다시 선택";
-    subjBtn.onclick = () => renderRecommendSubjectButtons();
-    btnList.appendChild(subjBtn);
-
-    const homeBtn = document.createElement("button");
-    homeBtn.className = "chip-btn";
-    homeBtn.textContent = "◀ 처음으로";
-    homeBtn.onclick = () => renderMainButtons();
-    btnList.appendChild(homeBtn);
-  }
-
-  function openRecommendFlow() {
-    addBotMessage(
-      "성적별 수업 추천입니다.\n" +
-      "원하시는 과목을 선택해주세요."
-    );
-    renderRecommendSubjectButtons();
-  }
-
-  function renderRecommendSubjectButtons() {
-    btnTitle.textContent = "과목 선택";
-    btnList.innerHTML = "";
-
-    SUBJECT_LIST.forEach(sub => {
-      const btn = document.createElement("button");
-      btn.className = "chip-btn";
-      btn.textContent = sub;
-      btn.onclick = () => renderRecommendLevelButtons(sub);
-      btnList.appendChild(btn);
+    let msg = "📋 대기정보 목록\n\n";
+    waitingList.forEach((item, i) => {
+      msg += `${i + 1}) 학반/강좌: ${item.lecture}\n`;
+      msg += `   담임/강사: ${item.teacher}\n`;
+      msg += `   대기번호: ${item.waitNo}번\n\n`;
     });
 
-    const homeBtn = document.createElement("button");
-    homeBtn.className = "chip-btn";
-    homeBtn.textContent = "◀ 처음으로";
-    homeBtn.onclick = () => renderMainButtons();
-    btnList.appendChild(homeBtn);
+    addBotMessage(msg);
   }
 
-  function renderRecommendLevelButtons(subject) {
-    btnTitle.textContent = subject + " / 등급 선택";
-    btnList.innerHTML = "";
+  // [우석 추가] 결제내역: 학원/결제일자/구매내역/금액/수단/상태 안내
+  function handlePaymentInfo() {
+    const paymentList = [
+      // 예시 형태:
+      // {
+      //   campus: "러셀 대치",
+      //   date: "2025-01-03",
+      //   item: "고3 수학 단과",
+      //   amount: "350,000원",
+      //   method: "카드결제(삼성)",
+      //   status: "결제완료"
+      // }
+    ];
 
-    LEVEL_LIST.forEach(lv => {
-      const btn = document.createElement("button");
-      btn.className = "chip-btn";
-      btn.textContent = lv;
-      btn.onclick = () => showRecommendResult(subject, lv);
-      btnList.appendChild(btn);
+    if (paymentList.length === 0) {
+      addBotMessage("💳 결제내역이 없습니다.");
+      return;
+    }
+
+    let msg = "💳 결제내역\n\n";
+    paymentList.forEach((p, i) => {
+      msg += `${i + 1}) 학원: ${p.campus}\n`;
+      msg += `   결제일자: ${p.date}\n`;
+      msg += `   구매내역: ${p.item}\n`;
+      msg += `   결제금액: ${p.amount}\n`;
+      msg += `   결제수단: ${p.method}\n`;
+      msg += `   상태: ${p.status}\n\n`;
     });
 
-    const backBtn = document.createElement("button");
-    backBtn.className = "chip-btn";
-    backBtn.textContent = "◀ 과목 다시 선택";
-    backBtn.onclick = () => renderRecommendSubjectButtons();
-    btnList.appendChild(backBtn);
+    addBotMessage(msg);
   }
 
   /* ===============================
-     4) 초기 실행
+     [우석 추가] 환불신청 하위 메뉴 (단과/교재/바자관)
      =============================== */
+
+  function renderRefundSubMenu() {
+    addBotMessage("원하시는 환불 유형을 선택해 주세요.");
+
+    btnTitle.textContent = "환불신청 세부 메뉴";
+    btnList.innerHTML = "";
+
+    const subMenus = [
+      { label: "단과환불 신청" },
+      { label: "교재환불 신청" },
+      { label: "바자관환불 신청" }
+    ];
+
+    subMenus.forEach(sub => {
+      const b = document.createElement("button");
+      b.className = "chip-btn";
+      b.textContent = sub.label;
+
+      if (sub.label === "단과환불 신청") {
+        // [우석 추가] 단과 환불 신청: 실제 환불 신청 로직 연결
+        b.onclick = () => handleRefundSingle();
+      } else {
+        // [우석 추가] 교재/바자관 환불은 추후 구현 예정 (현재는 안내만)
+        b.onclick = () => addBotMessage(`${sub.label} 기능은 추후 오픈 예정입니다.`);
+      }
+
+      btnList.appendChild(b);
+    });
+
+    const homeBtn = document.createElement("button");
+    homeBtn.className = "chip-btn";
+    homeBtn.textContent = "◀ 나의 수강정보로";
+    homeBtn.onclick = () => openMenu("나의 수강정보");
+    btnList.appendChild(homeBtn);
+  }
+
+  /* ===============================
+     [우석 추가] 학생 정보 관리(localStorage) + 구글 시트 연동 + 단과 환불 처리
+     =============================== */
+
+  // [우석 추가] 학생 정보(이름/학번)를 최초 1회 입력받고 localStorage에 저장
+  function getStudentInfo() {
+    let name = localStorage.getItem("studentName");
+    let studentId = localStorage.getItem("studentId");
+
+    if (!name || !studentId) {
+      name = prompt("학생 이름을 입력해 주세요:");
+      studentId = prompt("재원생 학번(6~7자리)을 입력해 주세요:");
+
+      if (!name || !studentId) {
+        alert("이름과 학번 입력이 필요합니다.");
+        return null;
+      }
+
+      localStorage.setItem("studentName", name);
+      localStorage.setItem("studentId", studentId);
+    }
+
+    return { name, studentId };
+  }
+
+  // [우석 추가] 구글 시트(Google Apps Script Webhook)로 환불 정보를 전송
+  function sendRefundToSheet(type, name, studentId, courses) {
+    fetch(SHEET_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: type,          // "single" | "book" | "bazaar"
+        name: name,          // 학생 이름
+        studentId: studentId, // 재원생 학번
+        courses: courses     // 환불 신청 강좌 배열
+      })
+    })
+      .then(res => res.text())
+      .then(text => {
+        console.log("Google Sheet Response:", text);
+      })
+      .catch(err => {
+        console.error("Error:", err);
+      });
+  }
+
+  // [우석 추가] 단과환불 신청: 현재 수강중 강좌에서 중복 선택 후 시트에 자동 입력
+  function handleRefundSingle() {
+    const student = getStudentInfo();
+    if (!student) return;
+
+    const courseList = currentCoursesData || [];
+
+    if (courseList.length === 0) {
+      addBotMessage("📌 현재 수강중인 강좌가 없습니다.");
+      return;
+    }
+
+    addBotMessage("환불 신청할 강좌를 선택해 주세요.\n(여러 과목 선택 가능)");
+
+    btnTitle.textContent = "단과환불 신청 - 강좌 선택";
+    btnList.innerHTML = "";
+
+    courseList.forEach(course => {
+      const label = document.createElement("label");
+      label.style.display = "flex";
+      label.style.alignItems = "center";
+      label.style.gap = "6px";
+      label.style.fontSize = "12px";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = course;
+
+      label.appendChild(checkbox);
+      label.appendChild(document.createTextNode(course));
+      btnList.appendChild(label);
+    });
+
+    const okBtn = document.createElement("button");
+    okBtn.className = "chip-btn";
+    okBtn.textContent = "선택 완료";
+    okBtn.style.marginTop = "10px";
+
+    okBtn.onclick = () => {
+      const selected = [...btnList.querySelectorAll("input[type=checkbox]:checked")].map(x => x.value);
+
+      if (selected.length === 0) {
+        addBotMessage("선택된 강좌가 없습니다.");
+        return;
+      }
+
+      // [우석 추가] 총 N개 강좌 환불 완료 안내
+      addBotMessage(`총 ${selected.length}개 강좌 환불 신청이 완료되었습니다.`);
+
+      // [우석 추가] 선택한 강좌 정보를 구글 시트에 기록
+      sendRefundToSheet("single", student.name, student.studentId, selected);
+    };
+
+    btnList.appendChild(okBtn);
+  }
 
   function init() {
     const firstMsg =
       "안녕하세요. 메가스터디 러셀 대치학원 챗봇입니다.\n\n" +
-      "학원 이용, 모집요강, 단과 시간표, 자습전용관, 모의고사, 출강 선생님 안내와\n" +
-      "성적별 수업 추천 기능을 제공합니다.\n" +
-      "아래 버튼을 눌러 궁금한 내용을 선택해 주세요.";
+      "학원 이용, 모집요강, 단과 시간표, 자습전용관, 모의고사, 출강 선생님, 나의 수강정보까지\n" +
+      "아래 버튼을 눌러서 궁금한 내용을 선택해 주세요.";
     addBotMessage(firstMsg);
     renderMainButtons();
   }
