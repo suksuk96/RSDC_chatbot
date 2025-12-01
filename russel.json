@@ -1,0 +1,754 @@
+[
+  {
+    "subject": "국어 ",
+    "teacher": "류현준",
+    "title": "[문학,독서] 1등급을 위한 필수 독서 제재, 문학론",
+    "day": "월요일 ",
+    "time_raw": "9:00-12:30",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박재형",
+    "title": "[언매] 조각난 문법 개념의 대통합 문법 기본 + 실전 훈련",
+    "day": "월요일 ",
+    "time_raw": "9:00-12:30",
+    "level_text": null
+  },
+  {
+    "subject": "영어",
+    "teacher": "유진",
+    "title": "G.P.S 기출 유형별 해부 및 실전",
+    "day": "월요일 ",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "김가람",
+    "title": "실전개념과 도구정리 - 기출의 재해석",
+    "day": "월요일",
+    "time_raw": "13:30-16:30 ",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "수1",
+    "teacher": "김성은",
+    "title": "All in One 개념 무.불.개 - 수학1",
+    "day": "월요일",
+    "time_raw": "13:30-16:30 ",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "민동휘",
+    "title": "런업-겨울에 끝내는 미적분 개념",
+    "day": "월요일",
+    "time_raw": "14:00-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "확통",
+    "teacher": "양승진",
+    "title": "수능코드 확률과 통계",
+    "day": "월요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "최석호",
+    "title": "2027 백귀야행 필수 개념×유형 행동 완벽 총정리",
+    "day": "월요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "고수현",
+    "title": "시작부터 1등급, 실전모의고사 문풀반",
+    "day": "월요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김상훈",
+    "title": "[문학,독서] 수능 국어의 토대 확립",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "신용선",
+    "title": "[문학,독서] 2027 기출 1순환 - 스캔",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "민동휘",
+    "title": "런업-겨울에 끝내는 수2 개념",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "공통,미적",
+    "teacher": "장영진",
+    "title": "2027 개념태제 미적분 (수능 개념완성)",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "고수현",
+    "title": "시작부터 1등급, 2027 Go독해_지문구조",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "조정식",
+    "title": "믿어봐! 문장/글 읽는 법을 알려줄게",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "생활과 윤리",
+    "teacher": "강라현",
+    "title": "바른 개념 완성",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "물리학1",
+    "teacher": "강민웅",
+    "title": "물아일체 개념완성 + 기출완성",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "생명과학1",
+    "teacher": "이석준",
+    "title": "수능 생명과학I START (개념+문제풀이)",
+    "day": "월요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김태진",
+    "title": "[문학,독서] 문장 독해 / 문학 개념 매뉴얼",
+    "day": "화요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박재형",
+    "title": "[문학,독서] 낯선 지문을 장악하는 일관된 생각법 (2개월 완성)",
+    "day": "화요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "신용선",
+    "title": "[언매] 출중한 언어 - 일주일에 딱 6시간만 투자하면 끝!",
+    "day": "화요일",
+    "time_raw": "9:00-12:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "엄정애",
+    "title": "[문학,독서] 두 달의 각성_생각 회로 새로 짜기",
+    "day": "화요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "곽민석",
+    "title": "기본 개념부터 실전 개념까지 완벽히 완성하기",
+    "day": "화요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "강영찬",
+    "title": "VisiON : 문제를 보는 눈이 달라진다",
+    "day": "화요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "김성은",
+    "title": "All in One 개념 무.불.개 - 수학2",
+    "day": "화요일",
+    "time_raw": "13:30-16:30 ",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "오르새",
+    "title": "개념에센스 & [공통] 기출 100선",
+    "day": "화요일",
+    "time_raw": "14:00-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "확통",
+    "teacher": "장영진",
+    "title": "2027 개념태제 확통 (수능 개념완성)",
+    "day": "화요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "류현준",
+    "title": "[문학,독서] 시즌1 류현준의 웜업(Warm Up)",
+    "day": "화요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박재형",
+    "title": "[문학,독서] 낯선 지문을 장악하는 일관된 생각법 (2개월 완성)",
+    "day": "화요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "수1",
+    "teacher": "김기현",
+    "title": "IDEA 수학I",
+    "day": "화요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "수학",
+    "teacher": "이준호",
+    "title": "Lee:Born by 기출",
+    "day": "화요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "김기철",
+    "title": "기출완성! 지문이해의 원리 / 5개년 기출 정복",
+    "day": "화요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "김수영",
+    "title": "도식화로 구문 이해 끝",
+    "day": "화요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "류현준",
+    "title": "[언매] 류현준의 언어(문법) 올인원",
+    "day": "수요일",
+    "time_raw": "9:00-12:30",
+    "level_text": null
+  },
+  {
+    "subject": "확통",
+    "teacher": "민동휘",
+    "title": "런업-겨울에 끝내는 확통 개념",
+    "day": "수요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "유진",
+    "title": "G.P.S 기출 유형별 해부 및 실전",
+    "day": "수요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "정담온",
+    "title": "[언매] 답ALL담 & 답FULL담 언어와매체 (8주 완성)",
+    "day": "수요일",
+    "time_raw": "13:30-17:00",
+    "level_text": null
+  },
+  {
+    "subject": "공통",
+    "teacher": "김가람",
+    "title": "실전개념과 도구정리 - 기출의 재해석",
+    "day": "수요일",
+    "time_raw": "14:00-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "수1",
+    "teacher": "김성은",
+    "title": "All in One 개념 무.불.개 - 수학1",
+    "day": "수요일",
+    "time_raw": "13:30-16:30 ",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "민동휘",
+    "title": "런업-겨울에 끝내는 미적분 개념",
+    "day": "수요일",
+    "time_raw": "14:00-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "최석호",
+    "title": "2027 백귀야행 필수 개념×유형 개념 완벽 총정리",
+    "day": "수요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "정담온",
+    "title": "[문학,독서] 답ALL담 독서 & 문학",
+    "day": "수요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "김가람",
+    "title": "완벽한 기본기와 심화개념까지! 개념의 재해석",
+    "day": "수요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "오르새",
+    "title": "오르새 개념에센스 α (현장 ver.)",
+    "day": "수요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "곽동령",
+    "title": "액셀러레이터(Accelerator)",
+    "day": "수요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김태진",
+    "title": "[문학,독서] 문장 독해 / 문학 개념 매뉴얼",
+    "day": "목요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박재형",
+    "title": "[문학,독서] 낯선 지문을 장악하는 일관된 생각법 (2개월 완성)",
+    "day": "목요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "신용선",
+    "title": "[언매] 출중한 언어 - 일주일에 딱 6시간만 투자하면 끝",
+    "day": "목요일",
+    "time_raw": "9:00-12:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "엄정애",
+    "title": "[문학,독서] 두 달의 각성_생각 회로 새로 짜기",
+    "day": "목요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "곽민석",
+    "title": "기본 개념부터 실전 개념까지 완벽히 완성하기",
+    "day": "목요일",
+    "time_raw": "9:00-12:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김강민",
+    "title": "[언매] 국어교육 전공자의 문법 특강 (9주 완성)",
+    "day": "목요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김태진",
+    "title": "[언매] ‘개념+기출+문풀’ (2개월 완성)",
+    "day": "목요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "김성은",
+    "title": "All in One 개념 무.불.개 - 수학2",
+    "day": "목요일",
+    "time_raw": "13:30-16:30 ",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "신성규",
+    "title": "신기해 (신성규의 기출 해석)",
+    "day": "목요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "오르새",
+    "title": "개념에센스 & [공통] 기출 100선",
+    "day": "목요일",
+    "time_raw": "14:00-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "오송은",
+    "title": "영어 글읽기의 맥(MAC)을 잡는 순간",
+    "day": "목요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김강민",
+    "title": "[문학,독서] 강민정음 : 창제",
+    "day": "목요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "이수민",
+    "title": "[문학,독서] 백분위 100을 만듭니다. Literacy paradigm",
+    "day": "목요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "공통,미적",
+    "teacher": "신성규",
+    "title": "신기해 (신성규의 기출 해석)",
+    "day": "목요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "이승효",
+    "title": "준킬러 시간단축을 위한 12테마 총정리",
+    "day": "목요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "김선덕",
+    "title": "기출로 완성하는 해석과 분석",
+    "day": "목요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "엄정애",
+    "title": "[화작] 4회에 끝내는 화법과 작문",
+    "day": "금요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "이수민",
+    "title": "[언매] 단 8회, 사실상의 언매 완성",
+    "day": "금요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "김성은",
+    "title": "시작하는 기출 100제 - 수학1+2",
+    "day": "금요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "미친국어",
+    "title": "[문학,독서] 평가원 행동 이론",
+    "day": "금요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "곽민석",
+    "title": "기본 개념부터 실전 개념까지 완벽히 완성하기",
+    "day": "금요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "확통",
+    "teacher": "김성은",
+    "title": "All in One 개념 무.불.개 - 확통",
+    "day": "금요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "양승진",
+    "title": "수능코드 미적분",
+    "day": "금요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "유진",
+    "title": "이번에도 역시, 기출은 G.P.S",
+    "day": "금요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "강민철",
+    "title": "[문학,독서] 강민철의 기출분석 (현장+라이브) *이원화",
+    "day": "토요일",
+    "time_raw": "08:00-12:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "김상훈",
+    "title": "[문학,독서] 수능 국어의 토대 확립",
+    "day": "토요일",
+    "time_raw": "09:00-12:30",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박석준",
+    "title": "[문학,독서] 박석준의 시작 : 평가원식 사고 with SYNC NOTE",
+    "day": "토요일",
+    "time_raw": "09:00-12:30",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "수1",
+    "teacher": "민동휘",
+    "title": "런업-겨울에 끝내는 수1 개념",
+    "day": "토요일",
+    "time_raw": "09:00-12:30",
+    "level_text": "3~4등급"
+  },
+  {
+    "subject": "미적,공통",
+    "teacher": "안재욱",
+    "title": "기출의 호흡",
+    "day": "토요일",
+    "time_raw": "09:00-12:30",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "조정식",
+    "title": "믿어봐! 문장/글 읽는 법을 알려줄게",
+    "day": "토요일",
+    "time_raw": "09:00-12:30",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "강민철",
+    "title": "[문학,독서] 강민철의 기출분석 (현장+라이브) *이원화",
+    "day": "토요일",
+    "time_raw": "13:00-17:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박석준",
+    "title": "[문학,독서] 박석준의 시작 : 평가원식 사고 with SYNC NOTE",
+    "day": "토요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "강영찬",
+    "title": "VisiON : 문제를 보는 눈이 달라진다",
+    "day": "토요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "공통",
+    "teacher": "양승진",
+    "title": "수능코드 수I, 수Ⅱ",
+    "day": "토요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "김지영",
+    "title": "2027 ALL IN ONE_어휘/어법/문장/독해 + 2027 V단어",
+    "day": "토요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "조정식",
+    "title": "믿어봐! 문장/글 읽는 법을 알려줄게",
+    "day": "토요일",
+    "time_raw": "13:30-17:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "강민철",
+    "title": "[문학,독서] 강민철의 기출분석 (현장+라이브) *이원화",
+    "day": "토요일",
+    "time_raw": "18:00-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "박찬결",
+    "title": "Blueprint : 사고의 설계도를 그리다",
+    "day": "토요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "수2",
+    "teacher": "김기현",
+    "title": "IDEA 수학II",
+    "day": "토요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "공통",
+    "teacher": "신성규",
+    "title": "신기해 (신성규의 기출 해석)",
+    "day": "토요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "고정재",
+    "title": "등급 메이커 원 투 : ONE & TWO",
+    "day": "토요일",
+    "time_raw": "18:30-22:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "영어",
+    "teacher": "조정식",
+    "title": "믿어봐! 문장/글 읽는 법을 알려줄게",
+    "day": "토요일",
+    "time_raw": "18:30-22:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "강민철",
+    "title": "[문학,독서] 강민철의 기출분석 (현장+라이브) *이원화",
+    "day": "일요일",
+    "time_raw": "08:00-12:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "이원준",
+    "title": "[문학,독서] 이원준 브레인 크래커CC (핵심코드)",
+    "day": "일요일",
+    "time_raw": "09:00-12:30",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "확통",
+    "teacher": "오르새",
+    "title": "오르새 개념에센스",
+    "day": "일요일",
+    "time_raw": "09:00-12:30",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "강민철",
+    "title": "[문학,독서] 강민철의 기출분석 (현장+라이브) *이원화",
+    "day": "일요일",
+    "time_raw": "13:00-17:00",
+    "level_text": null
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "최인호",
+    "title": "[문학,독서] '수능 기초부터 완성까지 '논리'로 완성",
+    "day": "일요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "2~3등급"
+  },
+  {
+    "subject": "미적",
+    "teacher": "오르새",
+    "title": "오르새 개념에센스",
+    "day": "일요일",
+    "time_raw": "13:30-17:00",
+    "level_text": "1~2등급"
+  },
+  {
+    "subject": "국어 ",
+    "teacher": "강민철",
+    "title": "[문학,독서] 강민철의 기출분석 (현장+라이브) *이원화",
+    "day": "일요일",
+    "time_raw": "18:00-22:00",
+    "level_text": null
+  }
+]
